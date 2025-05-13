@@ -1,1 +1,24 @@
-<p>login works!</p>
+<section class="min-h-[85vh] flex items-center justify-center p-4 sm:p-8 md:p-12">
+    <div
+        class="flex flex-col items-center w-full max-w-md bg-[var(--color-quatro)] p-6 sm:p-8 md:p-10 gap-6 rounded-3xl shadow-lg">
+
+        <span class="material-symbols-outlined text-[var(--color-dois)] text-7xl sm:text-8xl">
+            account_circle
+        </span>
+
+        <input type="number" placeholder="CPF"
+            class="w-full h-12 sm:h-14 bg-[var(--color-cinco)] rounded-full p-4 text-[var(--color-um)] outline-none text-base" />
+
+        <input type="password" placeholder="Senha" class="senha w-full h-12 sm:h-14 bg-[var(--color-cinco)] rounded-full p-4 text-[var(--color-um)] outline-none text-base" />
+
+        <button
+            class="w-full sm:w-2/3 md:w-1/2 h-12 bg-[var(--color-dois)] text-[var(--color-cinco)] rounded-full font-bold text-base hover:bg-[var(--color-tres)] transition">
+            Entrar
+        </button>
+
+        <a [routerLink]="['/cadastro']" class="text-[var(--color-um)] text-sm hover:font-bold text-center">
+            Cadastre-se
+        </a>
+
+    </div>
+</section>
