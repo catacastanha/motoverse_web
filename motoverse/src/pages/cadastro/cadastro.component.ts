@@ -10,7 +10,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 
 export class CadastroComponent implements AfterViewInit {
   @ViewChild('inputSenha') inputSenhaRef!: ElementRef<HTMLInputElement>;
-  @ViewChild('toggleSenha') toggleSenhaRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('toggleSesnha') toggleSenhaRef!: ElementRef<HTMLInputElement>;
 
   ngAfterViewInit(): void {
     const inputSenha = this.inputSenhaRef.nativeElement;
