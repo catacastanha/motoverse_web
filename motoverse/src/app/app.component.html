@@ -3,8 +3,12 @@
     <div class="flex items-center gap-4 sm:gap-6">
       <a [routerLink]="['/']" routerLinkActive="font-bold"><img src="images-home/Logo.png" alt="Logo Motoverse" class="h-8 sm:h-10" /></a>
       <nav class="hidden md:flex items-center gap-4 sm:gap-6 text-sm text-[var(--color-um)]">
-        <a [routerLink]="['/']" routerLinkActive="font-bold" class="hover:font-bold">Início</a>
+        <a [routerLink]="['/']" routerLinkActive="font-bold" class="hover:font-bold transition duration-1000">Início</a>
         <a [routerLink]="['estoque']" routerLinkActive="font-bold" class="hover:font-bold">Estoque</a>
+        <ng-container *ngIf="authService.isAdmin()">
+          <a [routerLink]="['cadastro-produto']" routerLinkActive="font-bold" class="hover:font-bold">Cadastrar Moto</a>
+          <a [routerLink]="['excluir-motos']" routerLinkActive="font-bold" class="hover:font-bold">Gerenciar Motos</a>
+        </ng-container>
       </nav>
     </div>
     <button class="md:hidden text-[var(--color-um)]">

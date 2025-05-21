@@ -4,6 +4,8 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from '../pages/home/home.component';
 import { LoginComponent } from '../pages/login/login.component';
 import { DescProdutosComponent } from '../pages/desc-produtos/desc-produtos.component';
+import { ExcluirMotosComponent } from '../pages/excluir-motos/excluir-motos.component';
+import { CadastroProdutosComponent } from '../pages/cadastro-produtos/cadastro-produtos.component';
 
 export const routes: Routes = [
   {
@@ -31,4 +33,13 @@ export const routes: Routes = [
     component: CadastroComponent
   },
 
+  {
+    path: "excluir-motos",
+    component: ExcluirMotosComponent
+  },
+
+  {
+    path: "cadastro-produtos",
+    component: CadastroProdutosComponent
+  }
 ];
