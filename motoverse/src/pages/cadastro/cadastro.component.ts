@@ -1,10 +1,13 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterLink, RouterModule, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { UsuarioService } from '../../app/services/usuario.service';
+import { Usuario } from '../../app/interfaces/usuario.interface';
 
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [RouterModule, RouterLink],
+  imports: [RouterModule, RouterLink, FormsModule],
   templateUrl: './cadastro.component.html',
 })
 
@@ -13,6 +16,20 @@ export class CadastroComponent implements AfterViewInit {
   @ViewChild('toggleSenha') mostraSenhaRef!: ElementRef<HTMLInputElement>;
   @ViewChild('inputCpf') inputCpfRef!: ElementRef<HTMLInputElement>;
   @ViewChild('inputCelular') numCelular!: ElementRef<HTMLInputElement>;
+
+  usuario: Usuario = {
+    id: 0,
+    nome: '',
+    cpf: '',
+    celular: '',
+    senha: '',
+    tipo: 'usuario'
+  };
+
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router
+  ) {}
 
   ngAfterViewInit(): void {
     const inputSenha = this.inputSenhaRef.nativeElement;
@@ -37,6 +54,7 @@ export class CadastroComponent implements AfterViewInit {
       valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
 
       inputCpf.value = valor;
+      this.usuario.cpf = valor;
     });
 
     numCelular.addEventListener('input', () => {
@@ -48,6 +66,42 @@ export class CadastroComponent implements AfterViewInit {
       valor = valor.replace(/(\d{5})(\d)/, '$1-$2');
 
       numCelular.value = valor;
+      this.usuario.celular = valor;
     });
-}
+  }
+
+  cadastrar(): void {
+    if (this.validarFormulario()) {
+      this.usuarioService.cadastrarUsuario(this.usuario).subscribe({
+        next: () => {
+          alert('Cadastro realizado com sucesso!');
+          this.router.navigate(['/login']);
+        },
+        error: (erro) => {
+          console.error('Erro ao cadastrar:', erro);
+          alert('Erro ao realizar cadastro. Tente novamente.');
+        }
+      });
+    }
+  }
+
+  private validarFormulario(): boolean {
+
+    if (this.usuario.cpf.length !== 14) {
+      alert('CPF inválido.');
+      return false;
+    }
+
+    if (this.usuario.celular.length !== 15) {
+      alert('Número de celular inválido.');
+      return false;
+    }
+
+    if (this.usuario.senha.length < 6) {
+      alert('A senha deve ter pelo menos 6 caracteres.');
+      return false;
+    }
+
+    return true;
+  }
 }
