@@ -10,7 +10,7 @@ export class UsuarioService {
     {
       id: 1,
       nome: 'catarina',
-      cpf: '150.997.286-26',
+      cpf: '150.999.999-99',
       celular: '(31) 97307-1453',
       senha: 'teste123',
       tipo: 'admin'
