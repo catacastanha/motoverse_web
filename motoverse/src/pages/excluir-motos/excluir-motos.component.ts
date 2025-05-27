@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-excluir-motos',
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule],
   templateUrl: './excluir-motos.component.html'
 })
 export class ExcluirMotosComponent {
