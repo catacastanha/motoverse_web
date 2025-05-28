@@ -1,31 +1,31 @@
 <header class="bg-[var(--color-quatro)] sticky w-full top-0">
   <div class="max-w-7xl mx-auto flex flex-wrap lg:flex-nowrap items-center justify-between h-15 px-4 lg:px-6">
     <div class="flex items-center gap-4 sm:gap-6">
-      <a [routerLink]="['/']" routerLinkActive="font-bold"><img src="images-home/Logo.png" alt="Logo Motoverse" class="h-8 sm:h-10" /></a>
+      <a [routerLink]="['/']" routerLinkActive="font-bold"><img src="images-home/Logo.png" alt="Logo Motoverse"
+          class="h-8 sm:h-10" /></a>
       <nav class="hidden md:flex items-center gap-4 sm:gap-6 text-sm text-[var(--color-um)]">
         <a [routerLink]="['/']" routerLinkActive="font-bold" class="hover:font-bold transition duration-1000">Início</a>
         <a [routerLink]="['estoque']" routerLinkActive="font-bold" class="hover:font-bold">Estoque</a>
         <ng-container *ngIf="authService.isAdmin()">
-          <a [routerLink]="['cadastro-produtos']" routerLinkActive="font-bold" class="hover:font-bold">Cadastrar Moto</a>
+          <a [routerLink]="['cadastro-produtos']" routerLinkActive="font-bold" class="hover:font-bold">Cadastrar
+            Moto</a>
           <a [routerLink]="['excluir-motos']" routerLinkActive="font-bold" class="hover:font-bold">Gerenciar Motos</a>
         </ng-container>
       </nav>
     </div>
-    
+
     <label class="md:hidden lg:hidden">
-      <div
-        class="w-9 h-10 cursor-pointer flex flex-col items-center justify-center"
-      >
+      <div class="w-9 h-10 cursor-pointer flex flex-col items-center justify-center">
         <input class="hidden peer" type="checkbox" />
         <div
-          class="w-[50%] h-[2px] bg-(--color-um) rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem] peer-checked:rotate-[-45deg]"
-        ></div>
+          class="w-[50%] h-[2px] bg-(--color-um) rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem] peer-checked:rotate-[-45deg]">
+        </div>
         <div
-          class="w-[50%] h-[2px] bg-(--color-um) rounded-md transition-all duration-300 origin-center peer-checked:hidden"
-        ></div>
+          class="w-[50%] h-[2px] bg-(--color-um) rounded-md transition-all duration-300 origin-center peer-checked:hidden">
+        </div>
         <div
-          class="w-[50%] h-[2px] bg-(--color-um) rounded-md transition-all duration-300 origin-left -translate-y-[0.45rem] peer-checked:rotate-[45deg]"
-        ></div>
+          class="w-[50%] h-[2px] bg-(--color-um) rounded-md transition-all duration-300 origin-left -translate-y-[0.45rem] peer-checked:rotate-[45deg]">
+        </div>
       </div>
     </label>
 
@@ -47,12 +47,13 @@
 
 
 <footer class="bg-[var(--color-quatro)] text-[var(--color-um)] w-full py-6 mt-7">
-  <div class="mx-auto flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 px-4 sm:px-6 text-center sm:text-left">
-    
+  <div
+    class="mx-auto flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 px-4 sm:px-6 text-center sm:text-left">
+
     <div>
       <p class="font-semibold">Fale Conosco</p>
       <p>atendimento&#64;motoverse.com</p>
-      <a href="https://wa.me/5531973071453" target="_blank">+55 (31) 97307-1453</a> | 
+      <a href="https://wa.me/5531973071453" target="_blank">+55 (31) 97307-1453</a> |
       <a href="https://wa.me/5531992980611" target="_blank">(31) 99298-0611</a>
     </div>
 
@@ -66,4 +67,3 @@
 
   </div>
 </footer>
-
