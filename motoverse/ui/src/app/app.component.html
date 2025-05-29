@@ -16,7 +16,7 @@
 
     <label class="md:hidden relative z-50">
       <div class="w-9 h-10 cursor-pointer flex flex-col items-center justify-center">
-        <input class="hidden peer" type="checkbox" [checked]="menuAberto" (change)="abreMenu()" />
+        <input class="hidden peer z-auto" type="checkbox" [checked]="menuAberto" (change)="abreMenu()" />
         <div
           class="w-[50%] h-[2px] bg-[var(--color-um)] rounded-sm transition-all duration-300 origin-left translate-y-[0.45rem] peer-checked:rotate-[-45deg]">
         </div>
@@ -30,7 +30,7 @@
     </label>
 
     <div *ngIf="menuAberto" 
-         class="fixed inset-0 bg-[var(--color-quatro)] z-40 transform transition-transform duration-300 ease-in-out">
+         class="fixed inset-0 bg-[var(--color-quatro)]">
       <nav class="flex flex-col items-center justify-center h-full gap-8 text-lg text-[var(--color-um)]">
         <a [routerLink]="['/']" routerLinkActive="font-bold" (click)="abreMenu()" class="hover:font-bold transition duration-1000">Início</a>
         <a [routerLink]="['estoque']" routerLinkActive="font-bold" (click)="abreMenu()" class="hover:font-bold">Estoque</a>

@@ -1,11 +1,13 @@
 <!-- barra de filtros -->
-<section class="bg-[var(--color-cinco)] flex items-center justify-center p-4 gap-3 sticky top-15 left-0 right-0 z-10 text-[var(--color-um)]">
+<section
+    class="bg-[var(--color-cinco)] flex items-center justify-center p-4 gap-3 text-[var(--color-um)]">
     <button class="flex items-center gap-1" (click)="filtros.abrirFiltros()">
-        Filtrar<span class="material-symbols-outlined">tune</span> 
+        Filtrar<span class="material-symbols-outlined">tune</span>
         <span *ngIf="filtrosAtivos" class="w-2 h-2 bg-[var(--color-um)] rounded-full"></span>
     </button>
     <button class="flex items-center gap-1" (click)="ordenarMotos()">
-        Ordenar<span class="material-symbols-outlined">{{ ordenacaoAtual === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</span>
+        Ordenar<span class="material-symbols-outlined">{{ ordenacaoAtual === 'asc' ? 'arrow_upward' : 'arrow_downward'
+            }}</span>
     </button>
 </section>
 
@@ -13,11 +15,12 @@
 
 <!-- grid com ngFor para exibir todas as motos -->
 <section class="flex justify-center items-center flex-col min-h-[calc(100vh-200px)]">
-    <div *ngIf="motosFiltradas.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-24 gap-y-13 p-3">
+    <div *ngIf="motosFiltradas.length > 0"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-24 gap-y-13 p-3">
         <div *ngFor="let moto of motosFiltradas">
             <a [routerLink]="['/desc-produtos', moto.id]"
                 class="card bg-[var(--color-cinco)] rounded-lg p-6 max-w-lg w-full flex flex-col items-center justify-start h-[440px] overflow-hidden">
-                
+
                 <img [src]="moto.imagem" [alt]="moto.nome" class="h-52 object-contain mb-2" />
 
                 <div class="bg-(--branco-opaco) w-screen flex flex-col items-center justify-center h-full">
