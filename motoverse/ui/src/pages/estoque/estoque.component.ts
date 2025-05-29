@@ -1,13 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { FiltrosComponent } from './filtros/filtros.component';
 
 @Component({
   selector: 'app-estoque',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FiltrosComponent],
   templateUrl: './estoque.component.html',
 })
 export class EstoqueComponent {
+  @ViewChild('filtros') filtros!: FiltrosComponent;
+  ordenacaoAtual: 'asc' | 'desc' = 'asc';
+  filtrosAtivos = false;
+  motosFiltradas: any[] = [];
+
   motos = [
     {
       id: 1,
@@ -61,4 +67,50 @@ export class EstoqueComponent {
       ano: 2025
     },
   ];
+
+  constructor() {
+    this.motosFiltradas = [...this.motos];
+  }
+
+  ordenarMotos() {
+    this.ordenacaoAtual = this.ordenacaoAtual === 'asc' ? 'desc' : 'asc';
+    this.motosFiltradas.sort((a, b) => {
+      if (this.ordenacaoAtual === 'asc') {
+        return a.nome.localeCompare(b.nome);
+      } else {
+        return b.nome.localeCompare(a.nome);
+      }
+    });
+  }
+
+  aplicarFiltros(filtros: any) {
+    this.motosFiltradas = this.motos.filter(moto => {
+      const matchModelo = !filtros.modelo || 
+        moto.nome.toLowerCase().includes(filtros.modelo.toLowerCase());
+      
+      const matchMarca = !filtros.marca || 
+        moto.nome.toLowerCase().includes(filtros.marca.toLowerCase());
+      
+      const matchKm = !filtros.kmMax || 
+        moto.km <= filtros.kmMax;
+      
+      const matchPrecoMin = !filtros.precoMin || 
+        moto.precoAtual >= filtros.precoMin;
+      
+      const matchPrecoMax = !filtros.precoMax || 
+        moto.precoAtual <= filtros.precoMax;
+
+      return matchModelo && matchMarca && matchKm && matchPrecoMin && matchPrecoMax;
+    });
+
+    this.filtrosAtivos = Object.values(filtros).some(value => value !== '' && value !== null);
+    this.ordenarMotos();
+  }
+
+  limparFiltros() {
+    this.motosFiltradas = [...this.motos];
+    this.filtrosAtivos = false;
+    this.filtros.limparFiltros();
+    this.ordenarMotos();
+  }
 }
