@@ -1,0 +1,43 @@
+<section class="min-h-[85vh] flex items-center justify-center p-4 sm:p-8 md:p-12">
+    <div class="flex flex-col items-center w-full max-w-md bg-[var(--color-quatro)] p-6 sm:p-8 md:p-10 gap-6 rounded-3xl shadow-lg">
+  
+      <input type="text" placeholder="Marca"
+        class="w-full h-12 sm:h-14 bg-[var(--color-cinco)] rounded-full p-4 text-[var(--color-um)] outline-none text-base" />
+  
+      <input type="text" placeholder="Modelo"
+        class="w-full h-12 sm:h-14 bg-[var(--color-cinco)] rounded-full p-4 text-[var(--color-um)] outline-none text-base" />
+  
+      <input type="text" maxlength="4" placeholder="Ano"
+        class="w-full h-12 sm:h-14 bg-[var(--color-cinco)] rounded-full p-4 text-[var(--color-um)] outline-none text-base" />
+  
+      <input type="number" placeholder="Quilometragem"
+        class="w-full h-12 sm:h-14 bg-[var(--color-cinco)] rounded-full pl-4 pr-12 text-[var(--color-um)] outline-none text-base" />
+  
+      <p class="self-start px-3.5 text-(--color-um)">Imagem:</p>
+      <form class="w-full flex items-center justify-center">
+        <label for="file"
+          class="cursor-pointer bg-[var(--color-cinco)] p-[30px_70px] rounded-[40px] border-2 border-dashed border-[var(--color-dois)] shadow-[0px_0px_200px_-50px_rgba(0,0,0,0.719)]">
+          <div class="flex flex-col items-center justify-center gap-1">
+            <svg viewBox="0 0 640 512" class="h-[50px] fill-[var(--color-dois)] mb-5">
+              <path
+                d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z">
+              </path>
+            </svg>
+
+            <span
+              class="bg-[var(--color-dois)] text-white px-4 py-1 rounded-[10px] transition-all duration-300 hover:bg-(--color-tres)">
+              Busque um Arquivo
+            </span>
+          </div>
+          <input id="file" type="file" class="hidden" />
+        </label>
+      </form>
+  
+      <button
+        class="w-full sm:w-2/3 md:w-1/2 h-12 bg-[var(--color-dois)] text-[var(--color-cinco)] rounded-full font-bold text-base hover:bg-[var(--color-tres)] transition">
+        Cadastrar
+      </button>
+  
+    </div>
+  </section>
+  
