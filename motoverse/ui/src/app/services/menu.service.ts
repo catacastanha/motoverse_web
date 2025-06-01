@@ -17,4 +17,8 @@ export class MenuService {
   getMenuState(): boolean {
     return this.menuAbertoSubject.value;
   }
+
+  fecharMenu() {
+    this.menuAbertoSubject.next(false);
+  }
 } 
