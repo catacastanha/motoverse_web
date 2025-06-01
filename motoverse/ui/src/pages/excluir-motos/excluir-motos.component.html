@@ -17,7 +17,7 @@
         <div *ngFor="let moto of motos" class="relative">
 
         <div class="absolute top-2 right-2 z-20">
-          <span class="material-symbols-outlined cursor-pointer text-(--vermelho-padrao) hover:text-(--color-um) transition">
+          <span (click)="abrirDialogoExclusao(moto)" class="material-symbols-outlined cursor-pointer text-(--vermelho-padrao) hover:text-(--color-um) transition">
             delete
           </span>
         </div>
@@ -43,3 +43,26 @@
 
     </div>
 </section>
+
+<div *ngIf="mostrarDialogoConfirmacao"
+     class="fixed inset-0 flex items-center justify-center z-50"
+     style="background-color: rgba(170, 192, 208, 0.308);">
+  <div class="bg-[var(--color-cinco)] p-6 rounded-3xl max-w-md w-full mx-4">
+    <h2 class="text-xl font-bold text-[var(--color-um)] mb-4">Confirmar Exclusão</h2>
+    <p class="text-[var(--color-um)] mb-6">
+      Tem certeza que deseja excluir a moto <strong>{{ motoParaExcluir?.nome }}</strong>?
+    </p>
+    <div class="flex justify-end gap-4">
+      <button 
+        (click)="fecharDialogoExclusao()"
+        class="px-4 py-2 rounded-lg bg-[var(--color-quatro)] text-[var(--color-um)] hover:bg-[var(--color-tres)] transition">
+        Cancelar
+      </button>
+      <button 
+        (click)="confirmarExclusao()"
+        class="px-4 py-2 rounded-lg bg-[var(--vermelho-padrao)] text-white hover:bg-red-700 transition">
+        Excluir
+      </button>
+    </div>
+  </div>
+</div>
