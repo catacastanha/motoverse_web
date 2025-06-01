@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: './excluir-motos.component.html'
 })
 export class ExcluirMotosComponent {
+    mostrarDialogoConfirmacao = false;
+    motoParaExcluir: any = null;
 
     motos = [
       {
@@ -61,6 +63,21 @@ export class ExcluirMotosComponent {
         ano: 2025
       },
     ];
-    
-  
+
+    abrirDialogoExclusao(moto: any) {
+      this.motoParaExcluir = moto;
+      this.mostrarDialogoConfirmacao = true;
+    }
+
+    fecharDialogoExclusao() {
+      this.mostrarDialogoConfirmacao = false;
+      this.motoParaExcluir = null;
+    }
+
+    confirmarExclusao() {
+      if (this.motoParaExcluir) {
+        this.motos = this.motos.filter(moto => moto.id !== this.motoParaExcluir.id);
+        this.fecharDialogoExclusao();
+      }
+    }
 }
