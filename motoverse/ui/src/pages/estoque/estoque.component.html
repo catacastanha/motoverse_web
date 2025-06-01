@@ -1,6 +1,6 @@
 <!-- barra de filtros -->
 <section
-    class="bg-[var(--color-cinco)] flex items-center justify-center p-4 gap-3 text-[var(--color-um)]">
+    class="bg-[var(--color-cinco)] flex items-center justify-center p-4 gap-3 text-[var(--color-um)] sticky top-14">
     <button class="flex items-center gap-1" (click)="filtros.abrirFiltros()">
         Filtrar<span class="material-symbols-outlined">tune</span>
         <span *ngIf="filtrosAtivos" class="w-2 h-2 bg-[var(--color-um)] rounded-full"></span>

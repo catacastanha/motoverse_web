@@ -11,7 +11,6 @@ export class AuthService {
   public usuarioAtual$ = this.usuarioAtualSubject.asObservable();
 
   constructor(private usuarioService: UsuarioService) {
-    // Recupera o usuário do localStorage ao iniciar
     const usuarioSalvo = localStorage.getItem('usuarioAtual');
     if (usuarioSalvo) {
       this.usuarioAtualSubject.next(JSON.parse(usuarioSalvo));
