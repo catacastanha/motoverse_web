@@ -15,15 +15,8 @@
           [alt]="moto.marca + ' ' + moto.modelo"
           class="w-full max-w-md mx-auto object-contain rounded-lg"
         />
-      </div>
-
-      <!-- Coluna da descrição e contato -->
-      <div class="flex flex-col items-center lg:items-start gap-6">
-        <p class="text-[var(--color-dois)] leading-relaxed text-justify">
-          {{ moto.descricao }}
-        </p>
-
-        <div class="w-full flex justify-center lg:justify-start">
+        <br>
+        <div class="w-full flex justify-center lg:justify-center">
           <a
             href="https://wa.me/5531992980611"
             target="_blank"
@@ -36,6 +29,34 @@
             </button>
           </a>
         </div>
+      </div>
+
+      <!-- Coluna da descrição e contato -->
+      <div class="flex flex-col items-center lg:items-center gap-6">
+        <p class="text-[var(--color-dois)] leading-relaxed text-justify">
+          {{ moto.descricao }}
+        </p>
+        <div class="w-full max-w-md mt-6 bg-white rounded-lg shadow-md p-6">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="flex flex-col">
+              <span class="text-sm text-gray-600">Valor Atual</span>
+              <span class="text-xl font-bold text-[var(--color-dois)]">R$ {{ moto.valor | number:'1.2-2' }}</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-sm text-gray-600">Valor Antigo</span>
+              <span class="text-lg line-through text-gray-500">R$ {{ moto.precoAntigo | number:'1.2-2' }}</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-sm text-gray-600">Quilometragem</span>
+              <span class="text-lg text-[var(--color-dois)]">{{ moto.km | number }} km</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-sm text-gray-600">Ano</span>
+              <span class="text-lg text-[var(--color-dois)]">{{ moto.anoLancamento }}</span>
+            </div>
+          </div>
+        </div>
+        
       </div>
 
     </div>
