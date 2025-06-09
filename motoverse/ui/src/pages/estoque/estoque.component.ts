@@ -1,84 +1,60 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { FiltrosComponent } from './filtros/filtros.component';
+import { MotoService } from '../../app/services/moto.service'; 
+import { Moto } from '../../app/interfaces/moto.interface';
 
 @Component({
   selector: 'app-estoque',
-  imports: [CommonModule, RouterLink, FiltrosComponent],
+  standalone: true,
+  imports: [CommonModule, RouterLink, HttpClientModule],
   templateUrl: './estoque.component.html',
 })
-export class EstoqueComponent {
+export class EstoqueComponent implements OnInit {
   @ViewChild('filtros') filtros!: FiltrosComponent;
   ordenacaoAtual: 'asc' | 'desc' = 'asc';
   filtrosAtivos = false;
-  motosFiltradas: any[] = [];
+  
+  motos: Moto[] = [];          
+  motosFiltradas: Moto[] = []; 
 
-  motos = [
-    {
-      id: 1,
-      nome: 'Honda CG 160 Titan 2025',
-      imagem: '/images-estoque/cg160.png',
-      precoAntigo: 21100,
-      precoAtual: 19556,
-      km: 0,
-      ano: 2025,
-    },
-    {
-      id: 2,
-      nome: 'Honda XRE 190 2025',
-      imagem: '/images-estoque/xre190.png',
-      precoAntigo: 24460,
-      precoAtual: 23913,
-      km: 0,
-      ano: 2025,
-    },
-    {
-      id: 3,
-      nome: 'Yamaha MT-03 2025',
-      imagem: '/images-estoque/mt03.png',
-      precoAntigo: 35700,
-      precoAtual: 33920.90,
-      km: 0,
-      ano: 2025,
-    },
-    {
-      id: 4,
-      nome: 'Bajaj Dominar 400 2025',
-      imagem: '/images-estoque/dominar400.png',
-      precoAtual: 26350,
-      km: 0,
-      ano: 2025,
-    },
-    {
-      id: 5,
-      nome: 'BMW GS 310 2025',
-      imagem: '/images-estoque/310gs.png',
-      precoAtual: 39500,
-      km: 0,
-      ano: 2025,
-    },
-    {
-      id: 6,
-      nome: 'Triumph Tiger 1200 2025',
-      imagem: '/images-estoque/tiger1200.png',
-      precoAtual: 88990,
-      km: 0,
-      ano: 2025
-    },
-  ];
+  carregando = true;
+  erro = '';
 
-  constructor() {
-    this.motosFiltradas = [...this.motos];
+  constructor(private motoService: MotoService) {}
+
+  ngOnInit(): void {
+    this.carregarMotos();
   }
 
-  ordenarMotos() {
-    this.ordenacaoAtual = this.ordenacaoAtual === 'asc' ? 'desc' : 'asc';
+  carregarMotos() {
+    this.carregando = true;
+    this.motoService.getMotos().subscribe({
+      next: (dados) => {
+        this.motos = dados;
+        this.motosFiltradas = [...this.motos];
+        this.carregando = false;
+        this.ordenarMotos('asc');
+      },
+      error: (err) => {
+        this.erro = 'Erro ao carregar motos.';
+        this.carregando = false;
+        console.error(err);
+      }
+    });
+  }
+
+  ordenarMotos(direcao?: 'asc' | 'desc') {
+    if (direcao) {
+      this.ordenacaoAtual = direcao;
+    }
     this.motosFiltradas.sort((a, b) => {
       if (this.ordenacaoAtual === 'asc') {
-        return a.nome.localeCompare(b.nome);
+        return a.marca.localeCompare(b.marca);
       } else {
-        return b.nome.localeCompare(a.nome);
+        return b.marca.localeCompare(a.marca);
       }
     });
   }
@@ -86,19 +62,19 @@ export class EstoqueComponent {
   aplicarFiltros(filtros: any) {
     this.motosFiltradas = this.motos.filter(moto => {
       const matchModelo = !filtros.modelo || 
-        moto.nome.toLowerCase().includes(filtros.modelo.toLowerCase());
-      
+        moto.modelo.toLowerCase().includes(filtros.modelo.toLowerCase());
+
       const matchMarca = !filtros.marca || 
-        moto.nome.toLowerCase().includes(filtros.marca.toLowerCase());
-      
+        moto.marca.toLowerCase().includes(filtros.marca.toLowerCase());
+
       const matchKm = !filtros.kmMax || 
         moto.km <= filtros.kmMax;
-      
+
       const matchPrecoMin = !filtros.precoMin || 
-        moto.precoAtual >= filtros.precoMin;
-      
+        moto.valor >= filtros.precoMin;
+
       const matchPrecoMax = !filtros.precoMax || 
-        moto.precoAtual <= filtros.precoMax;
+        moto.valor <= filtros.precoMax;
 
       return matchModelo && matchMarca && matchKm && matchPrecoMin && matchPrecoMax;
     });
