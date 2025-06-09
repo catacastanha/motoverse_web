@@ -12,7 +12,6 @@
       "precoAntigo": 21100,
       "km": 0
     },
-      
     {
       "id": 2,
       "marca": "Honda",
@@ -25,7 +24,6 @@
       "precoAntigo": 24460,
       "km": 0
     },
-      
     {
       "id": 3,
       "marca": "Yamaha",
@@ -34,11 +32,10 @@
       "anoLancamento": 2025,
       "descricao": "A Yamaha MT-03 é uma naked bike esportiva com design agressivo. Seu motor 321cc oferece excelente desempenho e diversão nas curvas.",
       "imagem": "/images-estoque/mt03.png",
-      "valor": 33920.90,
+      "valor": 33920.9,
       "precoAntigo": 35700,
       "km": 0
     },
-      
     {
       "id": 4,
       "marca": "Bajaj",
@@ -50,7 +47,6 @@
       "valor": 26350,
       "km": 0
     },
-      
     {
       "id": 5,
       "marca": "BMW",
@@ -62,7 +58,6 @@
       "valor": 39500,
       "km": 0
     },
-    
     {
       "id": 6,
       "marca": "Triumph",
@@ -73,9 +68,8 @@
       "imagem": "/images-estoque/tiger1200.png",
       "valor": 88990,
       "km": 0
-      }
-    ],
-  
+    }
+  ],
   "usuarios": [
     {
       "cpf": "123.456.789-10",
@@ -84,13 +78,12 @@
       "senha": "admin123",
       "administrador": 1
     },
-
     {
-        "cpf": "150.999.999-99",
-        "nome": "Catarina",
-        "numero": "(31) 99999-9999",
-        "senha": "123456",
-        "administrador": 0
-      }
+      "cpf": "150.999.999-99",
+      "nome": "Catarina",
+      "numero": "(31) 99999-9999",
+      "senha": "123456",
+      "administrador": 0
+    }
   ]
-} 
+}

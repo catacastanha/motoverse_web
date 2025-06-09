@@ -9,7 +9,7 @@ import { Moto } from '../../app/interfaces/moto.interface';
 @Component({
   selector: 'app-estoque',
   standalone: true,
-  imports: [CommonModule, RouterLink, HttpClientModule],
+  imports: [CommonModule, RouterLink, HttpClientModule, FiltrosComponent],
   templateUrl: './estoque.component.html',
 })
 export class EstoqueComponent implements OnInit {

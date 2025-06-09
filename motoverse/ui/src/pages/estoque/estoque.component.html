@@ -1,3 +1,15 @@
+<!-- Barra de filtros -->
+<section class="bg-[var(--color-cinco)] flex items-center justify-center p-4 gap-3 sticky top-15 left-0 right-0 z-[100] text-[var(--color-um)]">
+  <button (click)="filtros.abrirFiltros()" class="flex items-center gap-1 cursor-pointer">
+    Filtrar<span class="material-symbols-outlined">tune</span>
+  </button>
+  <button (click)="ordenarMotos(ordenacaoAtual === 'asc' ? 'desc' : 'asc')" class="flex items-center gap-1 cursor-pointer">
+    Ordenar<span class="material-symbols-outlined">swap_vert</span>
+  </button>
+</section>
+
+<app-filtros #filtros (filtrosAplicados)="aplicarFiltros($event)"></app-filtros>
+
 <section *ngIf="carregando" class="p-4 text-center text-[var(--color-um)]">
   Carregando motos...
 </section>
