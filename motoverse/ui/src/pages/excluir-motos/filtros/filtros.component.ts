@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-filtros',
+  selector: 'app-filtros-excluir',
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
@@ -93,7 +93,7 @@ import { FormsModule } from '@angular/forms';
     </div>
   `
 })
-export class FiltrosComponent {
+export class FiltrosExcluirComponent {
   @Output() filtrosAplicados = new EventEmitter<any>();
   isOpen = false;
 
@@ -107,6 +107,7 @@ export class FiltrosComponent {
 
   abrirFiltros() {
     this.isOpen = true;
+    console.log('Modal de filtros aberto. isOpen:', this.isOpen);
   }
 
   fecharFiltros() {
