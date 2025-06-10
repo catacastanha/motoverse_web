@@ -25,7 +25,7 @@
       <a [routerLink]="['/desc-produtos', moto.id]"
           class="card bg-[var(--color-cinco)] rounded-lg p-6 max-w-lg w-full flex flex-col items-center justify-start h-[440px] overflow-hidden">
 
-          <img [src]="moto.imagem" [alt]="moto.marca + ' ' + moto.modelo" class="h-52 object-contain mb-2" />
+          <img [src]="'http://localhost:3001' + moto.imagem" [alt]="moto.marca + ' ' + moto.modelo" class="h-52 object-contain mb-2" />
 
           <div class="bg-[var(--branco-opaco)] w-screen flex flex-col items-center justify-center h-full">
               <h3 class="font-bold text-center text-base mb-2">{{ moto.marca }} {{ moto.modelo }}</h3>

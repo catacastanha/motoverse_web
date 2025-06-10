@@ -48,7 +48,10 @@ export class LoginComponent implements AfterViewInit {
 
     this.authService.login(cpf, senha).subscribe(usuario => {
       if (usuario) {
+        alert('Login realizado com sucesso!');
         this.router.navigate(['/']);
+      } else {
+        alert('CPF ou senha inválidos.');
       }
     });
   }

@@ -84,26 +84,31 @@ export class ExcluirMotosComponent implements OnInit, AfterViewInit {
     }
 
     confirmarExclusao() {
+      console.log('confirmarExclusao called');
       if (this.motoParaExcluir) {
+        console.log('Moto para excluir:', this.motoParaExcluir);
         const novaQuantidade = this.motoParaExcluir.quantidade - this.quantidadeExclusao;
         
         if (novaQuantidade <= 0) {
-          // Se a quantidade for 0 ou negativa, remove o produto
+          console.log('Attempting to delete product with ID:', this.motoParaExcluir.id);
           this.http.delete(`http://localhost:3001/produtos/${this.motoParaExcluir.id}`).subscribe(
             () => {
+              console.log('Product deleted successfully');
               this.motos = this.motos.filter(moto => moto.id !== this.motoParaExcluir?.id);
               this.motosFiltradas = this.motosFiltradas.filter(moto => moto.id !== this.motoParaExcluir?.id);
               this.fecharDialogoExclusao();
             },
             (error) => {
               console.error('Erro ao excluir moto:', error);
+              alert('Erro ao excluir moto. Detalhes: ' + (error.error?.message || error.message));
             }
           );
         } else {
-          // Atualiza a quantidade do produto
+          console.log('Attempting to update product quantity:', novaQuantidade);
           const motoAtualizada = { ...this.motoParaExcluir, quantidade: novaQuantidade };
           this.http.patch(`http://localhost:3001/produtos/${this.motoParaExcluir.id}`, motoAtualizada).subscribe(
             () => {
+              console.log('Product quantity updated successfully');
               const index = this.motos.findIndex(moto => moto.id === this.motoParaExcluir?.id);
               if (index !== -1) {
                 this.motos[index] = motoAtualizada;
@@ -116,6 +121,7 @@ export class ExcluirMotosComponent implements OnInit, AfterViewInit {
             },
             (error) => {
               console.error('Erro ao atualizar quantidade:', error);
+              alert('Erro ao atualizar quantidade. Detalhes: ' + (error.error?.message || error.message));
             }
           );
         }

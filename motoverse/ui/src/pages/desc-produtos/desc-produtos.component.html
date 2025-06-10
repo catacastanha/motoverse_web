@@ -11,9 +11,9 @@
           {{ moto. marca }} {{ moto.modelo }}
         </h2>
         <img
-          [src]="moto.imagem"
+          [src]="'http://localhost:3001' + moto.imagem"
           [alt]="moto.marca + ' ' + moto.modelo"
-          class="w-full max-w-md mx-auto object-contain rounded-lg"
+          class="w-full max-w-md mx-auto object-contain rounded-lg max-h-96"
         />
         <br>
         <div class="w-full flex justify-center lg:justify-center">

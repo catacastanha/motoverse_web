@@ -67,8 +67,11 @@ export class EstoqueComponent implements OnInit {
     
     const termoBusca = termo.toLowerCase().trim();
     this.motosFiltradas = this.motos.filter(moto => {
-      return moto.marca.toLowerCase().includes(termoBusca) ||
-             moto.modelo.toLowerCase().includes(termoBusca);
+      const marca = moto.marca ? moto.marca.toLowerCase() : '';
+      const modelo = moto.modelo ? moto.modelo.toLowerCase() : '';
+
+      return marca.includes(termoBusca) ||
+             modelo.includes(termoBusca);
     });
     this.filtrosAtivos = true;
     this.ordenarMotos();
@@ -79,10 +82,13 @@ export class EstoqueComponent implements OnInit {
       this.ordenacaoAtual = direcao;
     }
     this.motosFiltradas.sort((a, b) => {
+      const marcaA = a.marca || '';
+      const marcaB = b.marca || '';
+
       if (this.ordenacaoAtual === 'asc') {
-        return a.marca.localeCompare(b.marca);
+        return marcaA.localeCompare(marcaB);
       } else {
-        return b.marca.localeCompare(a.marca);
+        return marcaB.localeCompare(marcaA);
       }
     });
   }
@@ -90,19 +96,19 @@ export class EstoqueComponent implements OnInit {
   aplicarFiltros(filtros: any) {
     this.motosFiltradas = this.motos.filter(moto => {
       const matchModelo = !filtros.modelo || 
-        moto.modelo.toLowerCase().includes(filtros.modelo.toLowerCase());
+        (moto.modelo ? moto.modelo.toLowerCase().includes(filtros.modelo.toLowerCase()) : false);
 
       const matchMarca = !filtros.marca || 
-        moto.marca.toLowerCase().includes(filtros.marca.toLowerCase());
+        (moto.marca ? moto.marca.toLowerCase().includes(filtros.marca.toLowerCase()) : false);
 
       const matchKm = !filtros.kmMax || 
-        moto.km <= filtros.kmMax;
+        (moto.km !== undefined && moto.km !== null ? moto.km <= filtros.kmMax : false);
 
       const matchPrecoMin = !filtros.precoMin || 
-        moto.valor >= filtros.precoMin;
+        (moto.valor !== undefined && moto.valor !== null ? moto.valor >= filtros.precoMin : false);
 
       const matchPrecoMax = !filtros.precoMax || 
-        moto.valor <= filtros.precoMax;
+        (moto.valor !== undefined && moto.valor !== null ? moto.valor <= filtros.precoMax : false);
 
       return matchModelo && matchMarca && matchKm && matchPrecoMin && matchPrecoMax;
     });
