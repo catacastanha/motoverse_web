@@ -38,6 +38,7 @@ export class UsuarioService {
 
   cadastrarUsuario(usuario: Usuario): Observable<Usuario> {
     usuario.id = this.usuarios.length + 1;
+    usuario.tipo = 'usuario';
     this.usuarios.push(usuario);
     return of(usuario);
   }

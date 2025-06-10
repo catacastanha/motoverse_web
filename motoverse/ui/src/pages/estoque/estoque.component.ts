@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FiltrosComponent } from './filtros/filtros.component';
 import { MotoService } from '../../app/services/moto.service'; 
@@ -23,10 +23,18 @@ export class EstoqueComponent implements OnInit {
   carregando = true;
   erro = '';
 
-  constructor(private motoService: MotoService) {}
+  constructor(
+    private motoService: MotoService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.carregarMotos();
+    this.route.queryParams.subscribe(params => {
+      if (params['search']) {
+        this.filtrarPorBusca(params['search']);
+      }
+    });
   }
 
   carregarMotos() {
@@ -36,6 +44,11 @@ export class EstoqueComponent implements OnInit {
         this.motos = dados;
         this.motosFiltradas = [...this.motos];
         this.carregando = false;
+        this.route.queryParams.subscribe(params => {
+          if (params['search']) {
+            this.filtrarPorBusca(params['search']);
+          }
+        });
         this.ordenarMotos('asc');
       },
       error: (err) => {
@@ -44,6 +57,21 @@ export class EstoqueComponent implements OnInit {
         console.error(err);
       }
     });
+  }
+
+  filtrarPorBusca(termo: string) {
+    if (!termo) {
+      this.motosFiltradas = [...this.motos];
+      return;
+    }
+    
+    const termoBusca = termo.toLowerCase().trim();
+    this.motosFiltradas = this.motos.filter(moto => {
+      return moto.marca.toLowerCase().includes(termoBusca) ||
+             moto.modelo.toLowerCase().includes(termoBusca);
+    });
+    this.filtrosAtivos = true;
+    this.ordenarMotos();
   }
 
   ordenarMotos(direcao?: 'asc' | 'desc') {
