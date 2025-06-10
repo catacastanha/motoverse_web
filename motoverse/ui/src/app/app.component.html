@@ -33,7 +33,7 @@
         <span class="material-symbols-outlined text-2xl mt-2">account_circle</span>
       </a>
       <div class="relative bg-[var(--color-cinco)] rounded-full">
-        <input type="search" name="search" placeholder="Buscar"
+        <input type="search" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()" name="search" placeholder="Buscar"
           class="w-32 sm:w-40 lg:w-48 focus:w-40 sm:focus:w-48 lg:focus:w-56 transition-all duration-500 px-3 py-1.5 rounded-full border border-none focus:outline-none focus:ring-1 focus:ring-[var(--color-dois)] placeholder:text-[var(--color-quatro)]" />
       </div>
     </div>

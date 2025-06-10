@@ -11,10 +11,8 @@ export class AuthService {
   public usuarioAtual$ = this.usuarioAtualSubject.asObservable();
 
   constructor(private usuarioService: UsuarioService) {
-    const usuarioSalvo = localStorage.getItem('usuarioAtual');
-    if (usuarioSalvo) {
-      this.usuarioAtualSubject.next(JSON.parse(usuarioSalvo));
-    }
+    localStorage.removeItem('usuarioAtual');
+    this.usuarioAtualSubject.next(null);
   }
 
   login(cpf: string, senha: string): Observable<Usuario | undefined> {
