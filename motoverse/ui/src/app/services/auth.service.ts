@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Usuario } from '../interfaces/usuario.interface';
-import { UsuarioService } from './usuario.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment/environment';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,28 +11,36 @@ import { UsuarioService } from './usuario.service';
 export class AuthService {
   private usuarioAtualSubject = new BehaviorSubject<Usuario | null>(null);
   public usuarioAtual$ = this.usuarioAtualSubject.asObservable();
+  private baseUrl = environment.url;
 
-  constructor(private usuarioService: UsuarioService) {
-    localStorage.removeItem('usuarioAtual');
-    this.usuarioAtualSubject.next(null);
+  constructor(private http: HttpClient) {
+    const storedUser = sessionStorage.getItem('usuarioAtual');
+    if (storedUser) {
+      this.usuarioAtualSubject.next(JSON.parse(storedUser));
+    }
   }
 
   login(cpf: string, senha: string): Observable<Usuario | undefined> {
-    return new Observable(observer => {
-      this.usuarioService.login(cpf, senha).subscribe(usuario => {
-        if (usuario) {
-          this.usuarioAtualSubject.next(usuario);
-          localStorage.setItem('usuarioAtual', JSON.stringify(usuario));
+    return this.http.post<any>(`${this.baseUrl}/login`, { cpf, senha }).pipe(
+      map(response => {
+        if (response.success && response.usuario) {
+          this.usuarioAtualSubject.next(response.usuario);
+          sessionStorage.setItem('usuarioAtual', JSON.stringify(response.usuario));
+          return response.usuario;
+        } else {
+          return undefined;
         }
-        observer.next(usuario);
-        observer.complete();
-      });
-    });
+      }),
+      catchError(error => {
+        console.error('Erro de login no serviço:', error);
+        return of(undefined);
+      })
+    );
   }
 
   logout(): void {
     this.usuarioAtualSubject.next(null);
-    localStorage.removeItem('usuarioAtual');
+    sessionStorage.removeItem('usuarioAtual');
   }
 
   isAdmin(): boolean {

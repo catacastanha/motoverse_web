@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../interfaces/usuario.interface';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
+  private baseUrl = environment.url;
   private usuarios: Usuario[] = [
     {
       id: 1,
@@ -25,43 +28,29 @@ export class UsuarioService {
     }
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getUsuarios(): Observable<Usuario[]> {
-    return of(this.usuarios);
+    return this.http.get<Usuario[]>(`${this.baseUrl}/usuarios`);
   }
 
   getUsuarioById(id: number): Observable<Usuario | undefined> {
-    return of(this.usuarios.find(usuario => usuario.id === id));
+    return this.http.get<Usuario>(`${this.baseUrl}/usuarios/${id}`);
   }
 
-
   cadastrarUsuario(usuario: Usuario): Observable<Usuario> {
-    usuario.id = this.usuarios.length + 1;
-    usuario.tipo = 'usuario';
-    this.usuarios.push(usuario);
-    return of(usuario);
+    return this.http.post<Usuario>(`${this.baseUrl}/usuarios`, usuario);
   }
 
   atualizarUsuario(usuario: Usuario): Observable<Usuario> {
-    const index = this.usuarios.findIndex(u => u.id === usuario.id);
-    if (index !== -1) {
-      this.usuarios[index] = usuario;
-    }
-    return of(usuario);
+    return this.http.put<Usuario>(`${this.baseUrl}/usuarios/${usuario.id}`, usuario);
   }
 
-  excluirUsuario(id: number): Observable<boolean> {
-    const index = this.usuarios.findIndex(u => u.id === id);
-    if (index !== -1) {
-      this.usuarios.splice(index, 1);
-      return of(true);
-    }
-    return of(false);
+  excluirUsuario(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/usuarios/${id}`);
   }
 
   login(email: string, senha: string): Observable<Usuario | undefined> {
-    const usuario = this.usuarios.find(u => u.cpf === email && u.senha === senha);
-    return of(usuario);
+    return of(this.usuarios.find(u => u.cpf === email && u.senha === senha));
   }
 }

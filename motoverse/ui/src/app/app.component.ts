@@ -25,23 +25,18 @@ export class AppComponent {
 
   onSearch(): void {
     if (this.searchTerm.trim()) {
-      // Check if we're already on the estoque page
       if (this.router.url.includes('/estoque')) {
-        // If on estoque page, just update the query params
         this.router.navigate([], {
           queryParams: { search: this.searchTerm.trim() },
           queryParamsHandling: 'merge'
         });
       } else {
-        // If on another page, navigate to estoque with search params
         this.router.navigate(['/estoque'], {
           queryParams: { search: this.searchTerm.trim() }
         });
       }
-      // Clear the search input after performing the search
       this.searchTerm = '';
     } else {
-      // Remove search parameter if search term is empty
       if (this.router.url.includes('/estoque')) {
         this.router.navigate([], {
           queryParams: { search: null },

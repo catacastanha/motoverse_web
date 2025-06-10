@@ -76,14 +76,22 @@
       "nome": "Admin",
       "numero": "(31) 99999-9998",
       "senha": "admin123",
-      "administrador": 1
+      "tipo": "admin"
     },
     {
       "cpf": "150.999.999-99",
       "nome": "Catarina",
       "numero": "(31) 99999-9999",
       "senha": "123456",
-      "administrador": 0
+      "tipo": "admin"
+    },
+    {
+      "id": null,
+      "nome": "davi",
+      "cpf": "146.081.756-70",
+      "celular": "(31) 99298-0611",
+      "senha": "dangelo",
+      "tipo": "usuario"
     }
   ]
 }
